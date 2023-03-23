@@ -18,6 +18,9 @@ class DineOutSpiderSpider(scrapy.Spider):
         for i in response.css('div.review-post'):
             yield {
                 'Name': response.css('h1.restnt-name').css('a::text').get(),
+                'Location': ",".join(response.css('div.restnt-loc').css('a::text').getall()),
+                'Price': response.css('div.fs16.marginB5').css('strong::text').get(),
+                'Cuisine Type': ",".join(response.css('div.cuisine-type').css('a::text').getall()),
                 'Rating': response.css('div.rating.rating-4::text').get(),
                 'Total votes': response.css('div.rating-txt').css('a::text').get(),
                 'Total Review': response.css('div.rating-txt::text').get(),
